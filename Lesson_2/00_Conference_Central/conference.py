@@ -67,9 +67,9 @@ class ConferenceApi(remote.Service):
         ## TODO 2
         ## step 1: make sure user is authed
         ## uncomment the following lines:
-        # user = endpoints.get_current_user()
-        # if not user:
-        #     raise endpoints.UnauthorizedException('Authorization required')
+        user = endpoints.get_current_user()
+        if not user:
+            raise endpoints.UnauthorizedException('Authorization required')
         profile = None
         ## step 2: create a new Profile from logged in user data
         ## you can use user.nickname() to get displayName
@@ -78,8 +78,8 @@ class ConferenceApi(remote.Service):
             profile = Profile(
                 userId = None,
                 key = None,
-                displayName = "Test", 
-                mainEmail= None,
+                displayName = user.nickname(), 
+                mainEmail= user.email(),
                 teeShirtSize = str(TeeShirtSize.NOT_SPECIFIED),
             )
 
@@ -109,7 +109,7 @@ class ConferenceApi(remote.Service):
         """Return user profile."""
         return self._doProfile()
 
-    # TODO 1
+    # TODO 1 DONE
     # 1. change request class
     # 2. pass request to _doProfile function
     @endpoints.method(ProfileMiniForm, ProfileForm,
