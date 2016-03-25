@@ -252,7 +252,10 @@ class ConferenceApi(remote.Service):
     def filterPlayground(self, request):
         f = ndb.query.FilterNode("city", "=", "London")
         f2 = ndb.query.FilterNode("topics", "=", "Medical Innovations")
-        q = Conference.query().filter(f).filter(f2).order(Conference.name)
+        q = Conference.query().filter(f) \
+                      .filter(f2) \
+                      .filter(Conference.month == 6) \
+                      .order(Conference.name)
         
         return ConferenceForms(items = [self._copyConferenceToForm(conf, "")
             for conf in q])
