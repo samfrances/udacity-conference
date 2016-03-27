@@ -1,4 +1,4 @@
 ud858
 =====
 
-Course code for Building Scalable Apps with Google App Engine in Python class
+Exercises for the Udacity course, "Developing Scalable Apps in Python".
